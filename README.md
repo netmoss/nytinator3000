@@ -7,7 +7,7 @@ A simple Python3 script that provides the answers for a range of NYT games.
 - Strands
 
 ## How does this script work?
-It retrieves the .json file that store today's solutions for the selected game from the NYT servers, parses it, and then prints out the relevant data. 
+It retrieves the .json file that stores today's solutions for the selected game from the NYT servers, parses it, and then prints out the relevant data. 
 
 ## WHy did you make this?
 The script isn't anything special, I just thought it would be a bit of fun :)
