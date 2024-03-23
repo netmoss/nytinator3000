@@ -42,7 +42,7 @@ func_list = [wordle, connections, strands]
 
 def menu():
     print("Which NYT game would you like the answer(s) to?\n---------------")
-    print("(1) Wordle\n(2) Connections\n(3) Spangram")
+    print("(1) Wordle\n(2) Connections\n(3) Strands")
     choice = int(input("").strip())
     func_list[choice-1]()
 
