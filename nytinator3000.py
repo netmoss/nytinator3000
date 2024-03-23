@@ -6,7 +6,9 @@ def wordle():
     url = "https://www.nytimes.com/svc/wordle/v2/" + str(date.today()) +".json"  
     response = urlopen(url)
     data = json.loads(response.read())
+
     print("The solution today is: "+ (data['solution']).upper())
+    return
 
 def connections():
     url = "https://www.nytimes.com/svc/connections/v1/" + str(date.today()) + ".json"
@@ -19,8 +21,9 @@ def connections():
     difficulties = ['straightforward','intermediate','hard', 'tricky']
 
     for i in range(0,4):
-        print('Difficulty: ' + str(difficulties[i]))
+        print('Difficulty: ' + str(difficulties[i]).capitalize())
         print(groups_list[i] + ":\n" + ', '.join(items_list[i]['members']) + "\n")
+    return
 
 def strands():
     url = "https://www.nytimes.com/games-assets/strands/" + str(date.today()) + ".json"
@@ -37,13 +40,13 @@ def strands():
         answers_list.append(solutions_list[i])
 
     print('Solutions: ' + ', '.join(answers_list))
+    return
 
 func_list = [wordle, connections, strands]
 
 def menu():
     print("Which NYT game would you like the answer(s) to?\n---------------")
     print("(1) Wordle\n(2) Connections\n(3) Strands")
-    choice = int(input("").strip())
-    func_list[choice-1]()
-
+    choice = input("").strip()
+    func_list[int(choice)-1]()
 menu()
