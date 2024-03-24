@@ -18,10 +18,10 @@ def connections():
     groups_list = list(data['groups'])
     items_list = list(data['groups'].values())
 
-    difficulties = ['straightforward','intermediate','hard', 'tricky']
+    difficulties = ['Straightforward','Intermediate','Hard','Tricky']
 
     for i in range(0,4):
-        print('Difficulty: ' + str(difficulties[i]).capitalize())
+        print('Difficulty: ' + str(difficulties[i]))
         print(groups_list[i] + ":\n" + ', '.join(items_list[i]['members']) + "\n")
     return
 
@@ -42,11 +42,30 @@ def strands():
     print('Solutions: ' + ', '.join(answers_list))
     return
 
-func_list = [wordle, connections, strands]
+def mini():
+    url = "https://www.nytimes.com/svc/crosswords/v6/puzzle/mini.json"
+    response = urlopen(url)
+    data = json.loads(response.read())
+
+    cells = data["body"][0]["cells"]
+    answers_list = []
+
+    for i in range(0, len(cells)):
+        if i % 5 == 0 and i > 1:
+            answers_list.append(", ")
+        elif not cells[i]:
+            continue
+        else:
+            answers_list.append(cells[i]['answer'])
+
+    print('Solutions across: ' + ''.join(answers_list))
+
+func_list = [wordle, connections, strands, mini]
 
 def menu():
     print("Which NYT game would you like the answer(s) to?\n---------------")
-    print("(1) Wordle\n(2) Connections\n(3) Strands")
-    choice = input("").strip()
-    func_list[int(choice)-1]()
+    print("(1) Wordle\n(2) Connections\n(3) Strands\n(4) Mini Crossword\n\nPlease enter a number:")
+    choice = int(input("").strip())
+    func_list[choice-1]()
+    return
 menu()
