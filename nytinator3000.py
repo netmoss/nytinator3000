@@ -49,16 +49,20 @@ def mini():
 
     cells = data["body"][0]["cells"]
     answers_list = []
+    row = 0
 
     for i in range(0, len(cells)):
-        if i % 5 == 0 and i > 1:
-            answers_list.append(", ")
-        elif not cells[i]:
+        if not cells[i]:
             continue
+        elif cells[i]['clues'][0] > row: 
+            row += 1
+            answers_list.append(", ")
+            answers_list.append(cells[i]['answer'])
         else:
             answers_list.append(cells[i]['answer'])
 
     print('Solutions across: ' + ''.join(answers_list))
+    return
 
 func_list = [wordle, connections, strands, mini]
 
