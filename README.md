@@ -12,4 +12,4 @@ It retrieves the .json file that stores today's solutions for the selected game 
 
 ## Why did you make this?
 This script isn't anything special, I just thought it would be a bit of fun :)
-I also wanted to learn more about parsing .json files with Python.
+<br>I also wanted to learn more about parsing .json files with Python.
