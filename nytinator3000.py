@@ -7,7 +7,7 @@ def wordle():
     response = urlopen(url)
     data = json.loads(response.read())
 
-    print("The solution today is: "+ (data['solution']).upper())
+    print("The solution today is: "+ (data["solution"]).upper())
     return
 
 def connections():
@@ -15,14 +15,13 @@ def connections():
     response = urlopen(url)
     data = json.loads(response.read())
 
-    groups_list = list(data['groups'])
-    items_list = list(data['groups'].values())
+    groups_list = list(data["groups"])
+    items_list = list(data["groups"].values())
 
-    difficulties = ['Straightforward','Intermediate','Hard','Tricky']
-
+    difficulties = ["Straightforward","Intermediate","Hard","Tricky"]
     for i in range(0,4):
-        print('Difficulty: ' + str(difficulties[i]))
-        print(groups_list[i] + ":\n" + ', '.join(items_list[i]['members']) + "\n")
+        print("Difficulty: " + str(difficulties[i]))
+        print(groups_list[i] + ":\n" + ", ".join(items_list[i]["members"]) + "\n")
     return
 
 def strands():
@@ -30,16 +29,16 @@ def strands():
     response = urlopen(url)
     data = json.loads(response.read())
 
-    spangram = data['spangram']
-    solutions_list = list(data['solutions'])
+    spangram = data["spangram"]
+    solutions_list = list(data["solutions"])
     answers_list = []
 
-    print('Spangram: ' + str(spangram))
+    print("Spangram: " + str(spangram))
 
     for i in range(0, solutions_list.index(str(spangram))):
         answers_list.append(solutions_list[i])
 
-    print('Solutions: ' + ', '.join(answers_list))
+    print("Solutions: " + ", ".join(answers_list))
     return
 
 def mini():
@@ -53,22 +52,22 @@ def mini():
 
     for i in range(0, len(cells)):
         if not cells[i]:
-            continue
-        elif cells[i]['clues'][0] > row: 
+            answers_list.append("_")
+        elif cells[i]["clues"][0] > row: 
             row += 1
-            answers_list.append(", " + cells[i]['answer'])
+            answers_list.append("\n" + cells[i]["answer"])
         else:
-            answers_list.append(cells[i]['answer'])
+            answers_list.append(cells[i]["answer"])
 
-    print('Solutions across: ' + ''.join(answers_list))
+    print("Solutions across:\n" + "".join(answers_list))
     return
 
 func_list = [wordle, connections, strands, mini]
 
 def menu():
     print("Which NYT game would you like the answer(s) to?\n---------------")
-    print("(1) Wordle\n(2) Connections\n(3) Strands\n(4) Mini Crossword\n\nPlease enter a number:")
-    choice = int(input("").strip())
+    print("(1) Wordle\n(2) Connections\n(3) Strands\n(4) Mini Crossword\n")
+    choice = int(input("Please enter a number: ").strip())
     func_list[choice-1]()
     return
 menu()
