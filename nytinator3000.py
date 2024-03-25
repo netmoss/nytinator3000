@@ -56,8 +56,7 @@ def mini():
             continue
         elif cells[i]['clues'][0] > row: 
             row += 1
-            answers_list.append(", ")
-            answers_list.append(cells[i]['answer'])
+            answers_list.append(", " + cells[i]['answer'])
         else:
             answers_list.append(cells[i]['answer'])
 
