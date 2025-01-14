@@ -2,18 +2,19 @@ import json
 from urllib.request import urlopen
 from datetime import date 
 
-def wordle():
-    url = "https://www.nytimes.com/svc/wordle/v2/" + str(date.today()) +".json"  
+def load_data(url: str):
     response = urlopen(url)
     data = json.loads(response.read())
+    return data
+
+def wordle():
+    data = load_data("https://www.nytimes.com/svc/wordle/v2/" + str(date.today()) +".json")
 
     print("The solution today is: "+ (data["solution"]).upper())
     return
 
 def connections():
-    url = "https://www.nytimes.com/svc/connections/v1/" + str(date.today()) + ".json"
-    response = urlopen(url)
-    data = json.loads(response.read())
+    data = load_data("https://www.nytimes.com/svc/connections/v1/" + str(date.today()) + ".json")
 
     groups_list = list(data["groups"])
     items_list = list(data["groups"].values())
@@ -25,26 +26,22 @@ def connections():
     return
 
 def strands():
-    url = "https://www.nytimes.com/games-assets/strands/" + str(date.today()) + ".json"
-    response = urlopen(url)
-    data = json.loads(response.read())
+    data = load_data("https://www.nytimes.com/svc/strands/v2/" + str(date.today()) + ".json")
 
     spangram = data["spangram"]
-    solutions_list = list(data["solutions"])
+    theme_words = list(data["themeWords"])
     answers_list = []
 
     print("Spangram: " + str(spangram))
 
-    for i in range(0, solutions_list.index(str(spangram))):
-        answers_list.append(solutions_list[i])
+    for i in range(0, len(theme_words)):
+        answers_list.append(theme_words[i])
 
     print("Solutions: " + ", ".join(answers_list))
     return
 
 def mini():
-    url = "https://www.nytimes.com/svc/crosswords/v6/puzzle/mini.json"
-    response = urlopen(url)
-    data = json.loads(response.read())
+    data = load_data("https://www.nytimes.com/svc/crosswords/v6/puzzle/mini.json")
 
     cells = data["body"][0]["cells"]
     answers_list = []
